@@ -19,51 +19,78 @@ let img = {
     k: 0,
 }
 
+let igor = {
+    x: 0,
+    trnstn: .25,
+    step: 50,
+    size: 18,
+    sizeStep: 4,
+    fontweight: 0,
+    fontweightstep: 50,
+    margintop: 21,
+    margintopstep: 22,
+    opacity: 0,
+}
+
 
 function checkButton(event) {
 
     if (event.keyCode === 37) {
         console.log("ArrowLeft");
         cube.x -=cube.step;
+        igor.x -=igor.step;
         renderCube(cube);
     }
     else if (event.keyCode === 39) {
         console.log("ArrowRight");
         cube.x +=cube.step;
+        igor.x +=igor.step;
         renderCube(cube);
     }
     else if (event.keyCode === 38) {
         console.log("ArrowUp");
         cube.y -=cube.step;
+        igor.y -=igor.step;
         renderCube(cube);
     }
     else if (event.keyCode === 40) {
         console.log("ArrowDown");
         cube.y +=cube.step;
+        igor.y +=igor.step;
         renderCube(cube);
     }
     else if (event.keyCode === 65) {
         console.log("A");
         cube.x +=cube.sizeStep;
         cube.width -=cube.step;
+        igor.size -=igor.sizeStep;
+        igor.fontweight -=igor.fontweightstep;
         renderCube(cube);
     }
     else if (event.keyCode === 68) {
         console.log("D");
         cube.x -=cube.sizeStep;
         cube.width +=cube.step;
+        igor.size +=igor.sizeStep;
+        igor.fontweight +=igor.fontweightstep;
         renderCube(cube);
     }
     else if (event.keyCode === 87) {
         console.log("W");
         cube.y -=cube.sizeStep;
         cube.height +=cube.step;
+        igor.size +=igor.sizeStep;
+        igor.margintop +=igor.margintopstep;
+        igor.fontweight +=igor.fontweightstep;
         renderCube(cube);
     }
     else if (event.keyCode === 83) {
         console.log("S");
         cube.y +=cube.sizeStep;
         cube.height -=cube.step;
+        igor.size -=igor.sizeStep;
+        igor.margintop -=igor.margintopstep;
+        igor.fontweight -=igor.fontweightstep;
         renderCube(cube);
     }
     else if (event.keyCode === 88) {
@@ -140,11 +167,13 @@ function checkButton(event) {
         if (img.k === 1) {
             console.log("C_field");
             document.getElementById("img").style.opacity = '0';
+            document.getElementById("igor").style.opacity = '1';
             img.k = 0;
         }
         else if (img.k === 0) {
             console.log("C_field");
             document.getElementById("img").style.opacity = '1';
+            document.getElementById("igor").style.opacity = '0';
             img.k = 1;
         }
     }
@@ -161,6 +190,13 @@ function renderCube(x, y) {
     document.getElementById("cube").style.transition = 'ease' + cube.trnstn;
     document.getElementById("cube").style.backgroundColor = cube.color;
     document.getElementById("cube").style.borderRadius = cube.borderRadius + 'px';
+
+    document.getElementById("igor").style.left = igor.x + 'px';
+    document.getElementById("igor").style.transition = 'ease' + igor.trnstn;
+    document.getElementById("igor").style.fontSize = igor.size + 'px';
+    document.getElementById("igor").style.marginTop = igor.margintop + 'px';
+    document.getElementById("igor").style.fontWeight = igor.fontweight;
+    
 }
 
 renderCube(cube.x, cube.y);
