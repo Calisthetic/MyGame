@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Дичь полная</title>
     <style>
         html, body {
             height: 100%;
@@ -11,19 +11,25 @@
             margin: 0;
             padding: 0;
             position: relative;
-            background-color: yellow;
+            background-color: white;
             overflow: hidden;
         }
         #cube {
+            background-color: white;
             position: absolute;
-            border-radius: 28px;
             cursor: pointer;
-            width: 56px;
-            height: 56px;
-            background-color: black;
+            width: 60px;
+            height: 60px;
             transition: ease .25s;
         }
-        #cubeIn {
+        #img {
+            top: 0px;
+            left: 0px;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+        }
+        /* #cubeIn {
             position: absolute;
             border-radius: 23px;
             margin: 5px;
@@ -34,11 +40,14 @@
         #cubeIn:hover {
             background-color: black;
             cursor: help;
-        }
+        } */
     </style>
 </head>
 <body>
-    <div id="cube"><div id="cubeIn"></div></div>
+    <img id="img" src="./Football.jpg">
+    <div id="cube">
+        <!-- <div id="cubeIn"></div> -->
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
