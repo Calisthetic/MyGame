@@ -1,38 +1,46 @@
 document.onkeydown = checkButton;
 
-function checkButton(event) {
+//some settings
+function renderMargin() {
+    map.marginX = map.x + map.borderWidth;
+    map.marginY = map.y + map.borderWidth;
+    cube.x = map.x + (map.width / 2) - (cube.width / 2);
+    cube.y = map.y + (map.height / 2) - (cube.height / 2);
+}
 
+//keyboard
+function checkButton(event) {
     //action
     if (event.keyCode === 37) {
         console.log("ArrowLeft");
-        if (cube.x - cube.step > 0) {
-            cube.x -=cube.step;
+        if (cube.x - cube.step < map.marginX) {
+            cube.x = map.marginX;
         }
-        else {cube.x = 0 + map.marginX;}
+        else {cube.x -= cube.step;}
         renderCube(cube);
     }
     if (event.keyCode === 39) {
         console.log("ArrowRight");
-        if (cube.step < map.width - cube.x - cube.width) {
-            cube.x +=cube.step;
+        if (cube.x + cube.step + cube.width > map.width + map.marginX) {
+            cube.x = map.marginX + map.width - cube.width;
         }
-        else {cube.x = map.width - cube.width + map.marginX;}
+        else {cube.x += cube.step;}
         renderCube(cube);
     }
     if (event.keyCode === 38) {
         console.log("ArrowUp");
-        if (cube.y - cube.step - map.marginY < 0) {
-            cube.y = 0 + map.marginY;
+        if (cube.y - cube.step < map.marginY) {
+            cube.y = map.marginY;
         }
         else {cube.y -=cube.step;}
         renderCube(cube);
     }
     if (event.keyCode === 40) {
         console.log("ArrowDown");
-        if (cube.step < map.height - cube.y - cube.height) {
-            cube.y +=cube.step;
+        if (cube.y + cube.height + cube.step > map.height + map.marginY) {
+            cube.y = map.height + map.marginY - cube.height;
         }
-        else {cube.y = map.height - cube.height + map.marginY;}
+        else {cube.y += cube.step;}
         renderCube(cube);
     }
     //size
@@ -160,7 +168,7 @@ function checkButton(event) {
     renderCube(cube);
 }
 
-function renderCube(x, y) {
+function renderCube(cube) {
     document.getElementById(cube.id).style.top = cube.y + 'px';
     document.getElementById(cube.id).style.left = cube.x + 'px';
     document.getElementById(cube.id).style.width = cube.width + 'px';
@@ -175,6 +183,6 @@ function renderMap(map) {
     document.getElementById('map').style.left = map.x + 'px';
     document.getElementById('map').style.width = map.width + 'px';
     document.getElementById('map').style.height = map.height + 'px';
-    document.getElementById('map').style.border = '5px solid ' + map.border;
+    document.getElementById('map').style.border = map.borderWidth + 'px solid ' + map.borderColor;
     document.getElementById('map').style.backgroundColor = map.color;
 }

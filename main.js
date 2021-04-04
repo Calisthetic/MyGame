@@ -14,15 +14,18 @@ let cube = {
     k: 0,
 }
 let map = {
+    id: 'map',
     x: 0,
     y: 0,
-    marginX: 5,
-    marginY: 5,
-    width: 320,
-    height: 320,
-    color: 'grey',
-    border: 'black'
+    borderWidth: 5,
+    marginX: 0,
+    marginY: 0,
+    width: 500,
+    height: 500,
+    color: 'gray',
+    borderColor: 'black',
 }
 
+renderMargin();
 renderMap(map);
 renderCube(cube);
