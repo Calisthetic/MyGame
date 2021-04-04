@@ -16,8 +16,10 @@ let cube = {
 let map = {
     x: 0,
     y: 0,
-    width: 470,
-    height: 470,
+    marginX: 5,
+    marginY: 5,
+    width: 320,
+    height: 320,
     color: 'grey',
     border: 'black'
 }
