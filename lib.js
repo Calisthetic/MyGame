@@ -2,10 +2,11 @@ document.onkeydown = checkButton;
 
 //some settings
 function renderMargin() {
-    map.marginX = map.x + map.borderWidth;
-    map.marginY = map.y + map.borderWidth;
+    map.marginX = map.marginX + map.x + map.borderWidth;
+    map.marginY = map.marginY + map.y + map.borderWidth;
     cube.x = map.x + (map.width / 2) - (cube.width / 2);
     cube.y = map.y + (map.height / 2) - (cube.height / 2);
+    cube.sizeStep = cube.sStep / 2;
 }
 
 //keyboard
@@ -46,13 +47,20 @@ function checkButton(event) {
     //size
     if (event.keyCode === 65) {
         console.log("A");
-        cube.x +=cube.sizeStep;
-        cube.width -=cube.sStep;
+        if (cube.width - cube.sStep > cube.widthMin) {
+            cube.x +=cube.sizeStep;
+            cube.width -=cube.sStep;
+        }
+        else {
+            cube.x =cube.x + ((cube.width - cube.widthMin) / 2);
+            cube.width = cube.widthMin;
+        }
         renderCube(cube);
+        cube.borderMax = cube.width / 2;
     }
     if (event.keyCode === 68) {
         console.log("D");
-        if (cube.width + cube.sStep < map.width) {
+        if (cube.width + cube.sStep <= cube.widthMax) {
             //right
             if (cube.x + cube.sizeStep + cube.width > map.width + map.marginX) {
                 cube.x = map.width + map.marginX - cube.sStep - cube.width;
@@ -68,19 +76,29 @@ function checkButton(event) {
                 cube.x -=cube.sizeStep;
             }
         }
+        //max
         else {
-            cube.x = map.marginX;
-            cube.width = map.width;
+            cube.x = cube.x - ((cube.widthMax - cube.width) / 2);
+            cube.width = cube.widthMax;
+            //left
+            if (cube.x < map.marginX) {
+                cube.x = map.marginX;
+            }
+            //right
+            else if (cube.x + cube.width > map.width + map.marginX) {
+                cube.x = map.marginX + map.width - cube.width;
+            }
         }
         renderCube(cube);
+        cube.borderMax = cube.width / 2;
     }
     if (event.keyCode === 87) {
         console.log("W");
-        if (cube.height + cube.sStep < map.height) {
+        if (cube.height + cube.sizeStep <= cube.heightMax) {
             //up
-            if (cube.y - cube.sizeStep - map.marginY < 0) {
-                cube.y = 0 + map.marginY;
-                cube.height +=cube.sStep;
+            if (cube.y - cube.sizeStep < map.marginY) {
+                cube.y = map.marginY;
+                 cube.height +=cube.sStep;
             }
             //down
             else if (cube.y + cube.sizeStep + cube.height > map.height + map.marginY) {
@@ -92,26 +110,52 @@ function checkButton(event) {
                 cube.y -= cube.sizeStep;
             }
         }
+        //max
         else {
-            cube.y = map.marginY;
-            cube.height = map.height;
+            cube.y = cube.y - ((cube.heightMax - cube.height) / 2);
+            cube.height = cube.heightMax;
+            //up
+            if (cube.y < map.marginY) {
+                cube.y = map.marginY;
+            }
+            else if (cube.y + cube.height > map.height + map.marginY) {
+                cube.y = map.marginY + map.height - cube.height;
+            }
         }
         renderCube(cube);
+        cube.borderMax = cube.height / 2;
     }
     if (event.keyCode === 83) {
         console.log("S");
-        cube.y +=cube.sizeStep;
-        cube.height -=cube.sStep;
+        if (cube.height - cube.sStep > cube.heightMin) {
+            cube.y +=cube.sizeStep;
+            cube.height -=cube.sStep;
+        }
+        else {
+            cube.y = cube.y + ((cube.height - cube.heightMin) /2);
+            cube.height = cube.heightMin;
+        }
         renderCube(cube);
+        cube.borderMax = cube.height / 2;
     }
     //border-radius
     if (event.keyCode === 88) {
         console.log("X");
-        cube.borderRadius +=cube.borderStep;
+        if (cube.borderRadius + cube.borderStep > cube.borderMax) {
+            cube.borderRadius = cube.borderMax;
+        }
+        else {
+            cube.borderRadius +=cube.borderStep;
+        }
     }
     if (event.keyCode === 90) {
         console.log("Z");
-        cube.borderRadius -= cube.borderStep;
+        if (cube.borderRadius - cube.borderStep < cube.borderMin) {
+            cube.borderRadius = cube.borderMin;
+        }
+        else {
+            cube.borderRadius -= cube.borderStep;
+        }
     }
     //colors
     if (event.keyCode === 49) {
