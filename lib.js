@@ -9,6 +9,19 @@ function renderMargin() {
     cube.sizeStep = cube.sStep / 2;
 }
 
+//clickRotate
+cube.onclick = function() {
+    if (cube.r === 0) {
+        cube.rotate = cube.rotate + 720;
+        cube.r = 1;
+    }
+    else {
+        cube.rotate = 0;
+        cube.r = 0;
+    }
+    renderCube(cube);
+};
+
 //keyboard
 function checkButton(event) {
     //action
@@ -94,7 +107,7 @@ function checkButton(event) {
     }
     if (event.keyCode === 87) {
         console.log("W");
-        if (cube.height + cube.sizeStep <= cube.heightMax) {
+        if (cube.height + cube.sStep <= cube.heightMax) {
             //up
             if (cube.y - cube.sizeStep < map.marginY) {
                 cube.y = map.marginY;
@@ -156,6 +169,11 @@ function checkButton(event) {
         else {
             cube.borderRadius -= cube.borderStep;
         }
+    }
+    //rotate
+    if (event.keyCode === 67) {
+        console.log("rotate");
+        cube.rotate +=cube.rotateStep;
     }
     //colors
     if (event.keyCode === 49) {
@@ -220,8 +238,9 @@ function renderCube(cube) {
     document.getElementById(cube.id).style.transition = 'ease' + cube.trnstn;
     document.getElementById(cube.id).style.backgroundColor = cube.color;
     document.getElementById(cube.id).style.borderRadius = cube.borderRadius + 'px';
-
+    document.getElementById(cube.id).style.transform = 'rotate(' + cube.rotate + 'deg)';
 }
+
 function renderMap(map) {
     document.getElementById('map').style.top = map.y + 'px';
     document.getElementById('map').style.left = map.x + 'px';

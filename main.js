@@ -9,6 +9,9 @@ let cube = {
     widthMax: 300,
     heightMax: 300,
     trnstn: .25,
+    //rotate
+    rotate: 0,
+    rotateStep: 15,
     //action
     step: 25,
     //size change
@@ -22,6 +25,7 @@ let cube = {
     borderMax: 0,
     sizeStep: 0,
     k: 0,
+    r: 0,
 }
 let map = {
     x: 0,
