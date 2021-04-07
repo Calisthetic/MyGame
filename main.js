@@ -25,7 +25,6 @@ let cube = {
     borderMax: 0,
     sizeStep: 0,
     k: 0,
-    r: 0,
 }
 let map = {
     x: 0,

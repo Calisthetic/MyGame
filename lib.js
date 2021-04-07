@@ -11,13 +11,14 @@ function renderMargin() {
 
 //clickRotate
 cube.onclick = function() {
-    if (cube.r === 0) {
-        cube.rotate = cube.rotate + 720;
-        cube.r = 1;
+    if (cube.rotate === 0) {
+        cube.rotate = 1080;
+    }
+    else if (cube.rotate === 1080) {
+        cube.rotate = 0;
     }
     else {
         cube.rotate = 0;
-        cube.r = 0;
     }
     renderCube(cube);
 };
