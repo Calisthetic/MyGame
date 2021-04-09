@@ -1,27 +1,20 @@
 document.onkeydown = checkButton;
 
-//some settings
-function renderMargin() {
-    map.marginX = map.marginX + map.x + map.borderWidth;
-    map.marginY = map.marginY + map.y + map.borderWidth;
-    cube.x = map.x + (map.width / 2) - (cube.width / 2);
-    cube.y = map.y + (map.height / 2) - (cube.height / 2);
-    cube.sizeStep = cube.sStep / 2;
-}
-
-//clickRotate
-cube.onclick = function() {
-    if (cube.rotate === 0) {
-        cube.rotate = 1080;
-    }
-    else if (cube.rotate === 1080) {
-        cube.rotate = 0;
+//cubeIn click
+cubeIn.onclick = function() {
+    if (cubeIn.c === 0) {
+        cubeIn.x = cube.width - 5 - cubeIn.width;
+        cubeIn.c = 1;
+        document.getElementById("cube").style.boxShadow = '0 0 5px 5px ' + cube.color;
+        setTimeout(okey, 1000);
     }
     else {
-        cube.rotate = 0;
+        cubeIn.c = 0;
+        cubeIn.x = 5;
+        document.getElementById("cube").style.boxShadow = '0 0 0px 0px';
     }
-    renderCube(cube);
-};
+    renderCubeIn(cubeIn);
+}
 
 //keyboard
 function checkButton(event) {
@@ -173,8 +166,54 @@ function checkButton(event) {
     }
     //rotate
     if (event.keyCode === 67) {
-        console.log("rotate");
-        cube.rotate +=cube.rotateStep;
+        console.log("C");
+        if (cube.rotate === 0) {
+            cube.rotate = 360;
+        }
+        else {
+            cube.rotate = 0;
+        }
+    }
+    if (event.keyCode === 81) {
+        console.log("Q");
+        if (cube.r === 0) {
+            cube.rotate +=60;
+            cube.x += cube.height / 2;
+            cube.y -= cube.height * Math.sqrt(3) / 2;
+            cube.r += 1;
+        }
+        else if (cube.r === 1) {
+            cube.rotate +=60;
+            cube.x += cube.height;
+            cube.r += 1;
+        }
+        else if (cube.r === 2) {
+            cube.rotate +=60;
+            cube.x += cube.height / 2;
+            cube.y += cube.height * Math.sqrt(3) / 2;
+            cube.r += 1;
+        }
+        else if (cube.r === 3) {
+            cube.rotate +=60;
+            cube.x -= cube.height / 2;
+            cube.y += cube.height * Math.sqrt(3) / 2;
+            cube.r += 1;
+        }
+        else if (cube.r === 4) {
+            cube.rotate +=60;
+            cube.x -= cube.height;
+            cube.r += 1;
+        }
+        else if (cube.r === 5) {
+            cube.rotate +=60;
+            cube.x -= cube.height / 2;
+            cube.y -= cube.height * Math.sqrt(3) / 2;
+            cube.r = 0;
+        }
+    }
+    //trolling
+    if (event.keyCode === 27) {
+        setTimeout(okey, 1000);
     }
     //colors
     if (event.keyCode === 49) {
@@ -228,7 +267,63 @@ function checkButton(event) {
             cube.k = 1;
         }
     }
+    //cubeIn
+    if (event.keyCode === 86) {
+        console.log("cubeIn");
+        if (cubeIn.k < 1) {
+            cubeIn.k = 1;
+            cubeIn.color = 'black';
+            cubeIn.opacity = 1;
+        }
+        else {
+            cubeIn.k = 0;
+            cubeIn.opacity = 0;
+        }
+    }
+    newCubeIn(cubeIn);
+    renderCubeIn(cubeIn);
     renderCube(cube);
+}
+
+function okey() {
+    alert('Нажми "ОК", если согласен ввести номер катры, срок её действия и CVV код на обратной стороне.');
+}
+
+//some settings
+function renderMargin() {
+    map.marginX = map.marginX + map.x + map.borderWidth;
+    map.marginY = map.marginY + map.y + map.borderWidth;
+    cube.x = map.x + (map.width / 2) - (cube.width / 2);
+    cube.y = map.y + (map.height / 2) - (cube.height / 2);
+    cube.sizeStep = cube.sStep / 2;
+}
+function newCubeIn(cubeIn) {
+    if (cubeIn.c === 1) {
+        if (cube.height <= cube.width) {
+            cubeIn.height = cube.height - 10;
+            cubeIn.width = cube.height - 10;
+        }
+        else {
+            cubeIn.c = 0;
+            cubeIn.k = 0;
+            cubeIn.opacity = 0;
+        }
+        cubeIn.x = cube.width - 5 - cubeIn.width;
+        cubeIn.y = 5;
+    }
+    else {
+        if (cube.height <= cube.width) {
+            cubeIn.height = cube.height - 10;
+            cubeIn.width = cube.height - 10;
+        }
+        else {
+            cubeIn.c = 0;
+            cubeIn.k = 0;
+            cubeIn.opacity = 0;
+        }
+        cubeIn.x = 5;
+        cubeIn.y = 5;
+    }
 }
 
 function renderCube(cube) {
@@ -236,12 +331,21 @@ function renderCube(cube) {
     document.getElementById(cube.id).style.left = cube.x + 'px';
     document.getElementById(cube.id).style.width = cube.width + 'px';
     document.getElementById(cube.id).style.height = cube.height + 'px';
-    document.getElementById(cube.id).style.transition = 'ease' + cube.trnstn;
+    document.getElementById(cube.id).style.transition = 'ease ' + cube.trnstn;
     document.getElementById(cube.id).style.backgroundColor = cube.color;
     document.getElementById(cube.id).style.borderRadius = cube.borderRadius + 'px';
     document.getElementById(cube.id).style.transform = 'rotate(' + cube.rotate + 'deg)';
 }
-
+function renderCubeIn(cubeIn) {
+    document.getElementById('cubeIn').style.top = cubeIn.y + 'px';
+    document.getElementById('cubeIn').style.left = cubeIn.x + 'px';
+    document.getElementById('cubeIn').style.height = cubeIn.height + 'px';
+    document.getElementById('cubeIn').style.width = cubeIn.width + 'px';
+    document.getElementById('cubeIn').style.borderRadius = cubeIn.height / 2 + 'px';
+    document.getElementById('cubeIn').style.opacity = cubeIn.opacity;
+    document.getElementById('cubeIn').style.transition = 'ease ' + cubeIn.trnstn;
+    document.getElementById('cubeIn').style.backgroundColor = cubeIn.color;
+}
 function renderMap(map) {
     document.getElementById('map').style.top = map.y + 'px';
     document.getElementById('map').style.left = map.x + 'px';

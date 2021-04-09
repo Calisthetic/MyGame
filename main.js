@@ -25,6 +25,20 @@ let cube = {
     borderMax: 0,
     sizeStep: 0,
     k: 0,
+    r: 0,
+    i: 0,
+}
+let cubeIn = {
+    x: 0,
+    y: 0,
+    height: 0,
+    width: 0,
+    borderRadius: 0,
+    opacity: 0,
+    trnstn: .25,
+    color: 0,
+    k: 0,
+    c: 0,
 }
 let map = {
     x: 0,
