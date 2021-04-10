@@ -1,19 +1,27 @@
 document.onkeydown = checkButton;
 
+//cube click -> rotate
+cube.onclick = function() {
+    cube.rotate = 0;
+    renderCube(cube);
+}
+
 //cubeIn click
 cubeIn.onclick = function() {
-    if (cubeIn.c === 0) {
-        cubeIn.x = cube.width - 5 - cubeIn.width;
-        cubeIn.c = 1;
-        document.getElementById("cube").style.boxShadow = '0 0 5px 5px ' + cube.color;
-        setTimeout(okey, 1000);
+    if (cubeIn.opacity === 1) {
+        if (cubeIn.c === 0) {
+            cubeIn.x = cube.width - 5 - cubeIn.width;
+            cubeIn.c = 1;
+            document.getElementById("cube").style.boxShadow = '0 0 5px 5px ' + cube.color;
+            setTimeout(okey, 1000);
+        }
+        else {
+            cubeIn.c = 0;
+            cubeIn.x = 5;
+            document.getElementById("cube").style.boxShadow = '0 0 0px 0px';
+        }
+        renderCubeIn(cubeIn);
     }
-    else {
-        cubeIn.c = 0;
-        cubeIn.x = 5;
-        document.getElementById("cube").style.boxShadow = '0 0 0px 0px';
-    }
-    renderCubeIn(cubeIn);
 }
 
 //keyboard
@@ -178,36 +186,36 @@ function checkButton(event) {
         console.log("Q");
         if (cube.r === 0) {
             cube.rotate +=60;
-            cube.x += cube.height / 2;
-            cube.y -= cube.height * Math.sqrt(3) / 2;
+            cube.x += (cube.height + cube.width) / 4;
+            cube.y -= ((cube.height + cube.width) / 2) * Math.sqrt(3) / 2;
             cube.r += 1;
         }
         else if (cube.r === 1) {
             cube.rotate +=60;
-            cube.x += cube.height;
+            cube.x += ((cube.height + cube.width) / 2);
             cube.r += 1;
         }
         else if (cube.r === 2) {
             cube.rotate +=60;
-            cube.x += cube.height / 2;
-            cube.y += cube.height * Math.sqrt(3) / 2;
+            cube.x += (cube.height + cube.width) / 4;
+            cube.y += ((cube.height + cube.width) / 2) * Math.sqrt(3) / 2;
             cube.r += 1;
         }
         else if (cube.r === 3) {
             cube.rotate +=60;
-            cube.x -= cube.height / 2;
-            cube.y += cube.height * Math.sqrt(3) / 2;
+            cube.x -= (cube.height + cube.width) / 4;
+            cube.y += ((cube.height + cube.width) / 2) * Math.sqrt(3) / 2;
             cube.r += 1;
         }
         else if (cube.r === 4) {
             cube.rotate +=60;
-            cube.x -= cube.height;
+            cube.x -= ((cube.height + cube.width) / 2);
             cube.r += 1;
         }
         else if (cube.r === 5) {
             cube.rotate +=60;
-            cube.x -= cube.height / 2;
-            cube.y -= cube.height * Math.sqrt(3) / 2;
+            cube.x -= (cube.height + cube.width) / 4;
+            cube.y -= ((cube.height + cube.width) / 2) * Math.sqrt(3) / 2;
             cube.r = 0;
         }
     }
@@ -259,20 +267,19 @@ function checkButton(event) {
     //shadow
     if (event.keyCode === 70) {
         if (cube.k === 1) {
-            document.getElementById("cube").style.boxShadow = '0 0 0px 0px';
+            cube.shadow = 10;
             cube.k = 0;
         }
         else if (cube.k === 0) {
-            document.getElementById("cube").style.boxShadow = '0 0 10px 10px ' + cube.color;
+            cube.shadow = 0;
             cube.k = 1;
         }
     }
     //cubeIn
     if (event.keyCode === 86) {
-        console.log("cubeIn");
+        console.log("V");
         if (cubeIn.k < 1) {
             cubeIn.k = 1;
-            cubeIn.color = 'black';
             cubeIn.opacity = 1;
         }
         else {
@@ -335,6 +342,7 @@ function renderCube(cube) {
     document.getElementById(cube.id).style.backgroundColor = cube.color;
     document.getElementById(cube.id).style.borderRadius = cube.borderRadius + 'px';
     document.getElementById(cube.id).style.transform = 'rotate(' + cube.rotate + 'deg)';
+    document.getElementById(cube.id).style.boxShadow = '0 0 ' + cube.shadow + 'px ' + cube.shadow + 'px ' + cube.color;
 }
 function renderCubeIn(cubeIn) {
     document.getElementById('cubeIn').style.top = cubeIn.y + 'px';
