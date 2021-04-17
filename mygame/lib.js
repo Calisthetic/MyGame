@@ -73,7 +73,6 @@ function renderMap(map) {
     document.getElementById('map').style.width = map.width + 'px';
     document.getElementById('map').style.height = map.height + 'px';
     document.getElementById('map').style.backgroundColor = map.color;
-    // document.getElementById('map').style.border = '2px solid ' + map.border;
 }
 
 function spawnCube(map, cube) {
@@ -81,12 +80,51 @@ function spawnCube(map, cube) {
     let mapMaxX = map.x + map.width - cube.width;
     let mapMinY = map.y;
     let mapMaxY = map.y + map.height - cube.height;
-    //how it work
-    let rand = Math.floor(Math.random() * (mapMaxX - mapMinX));
-    console.log(rand);
 
     cube.x = mapMinX + Math.random() * (mapMaxX - mapMinX);
     cube.y = mapMinY + Math.random() * (mapMaxY - mapMinY);
 
     return cube;
+}
+
+function renderBots(bots) {
+    bots.map(bot => {
+        let div = document.createElement('div');
+        div.id = 'bot_' + bot.id;
+        div.className = 'bot';
+        document.body.append(div);
+        renderBot(bot);
+    });
+}
+function renderBot(bot) {
+    document.getElementById('bot_' + bot.id).style.top = bot.y + 'px';
+    document.getElementById('bot_' + bot.id).style.left = bot.x + 'px';
+    document.getElementById('bot_' + bot.id).style.width = bot.width + 'px';
+    document.getElementById('bot_' + bot.id).style.height = bot.height + 'px';
+    document.getElementById('bot_' + bot.id).style.transition = 'ease ' + bot.trnstn + 's';
+    document.getElementById('bot_' + bot.id).style.backgroundColor = bot.color;
+
+}
+
+function renderBuffs(buffs) {
+    buffs.map(buff => {
+        let div = document.createElement('div');
+        div.id = 'buff_' + buff.id;
+        div.className = 'buff';
+        document.body.append(div);
+        renderBuff(buff);
+    });
+}
+function renderBuff(buff) {
+    document.getElementById('buff_' + buff.id).style.top = buff.y + 'px';
+    document.getElementById('buff_' + buff.id).style.left = buff.x + 'px';
+    document.getElementById('buff_' + buff.id).style.width = buff.width + 'px';
+    document.getElementById('buff_' + buff.id).style.height = buff.height + 'px';
+    document.getElementById('buff_' + buff.id).style.transition = 'ease ' + buff.trnstn + 's';
+    document.getElementById('buff_' + buff.id).style.backgroundColor = buff.color;
+
+}
+
+function timeTik() {
+    console.log(new Date().getSeconds());
 }

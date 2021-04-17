@@ -28,6 +28,7 @@ let cube = {
     shadow: 0,
     k: 0,
     c: 0,
+    kColor: 0,
 }
 let cubeIn = {
     x: 0,
@@ -45,7 +46,8 @@ let cubeDop = {
     y: 0,
     height: 30,
     width: 30,
-    color: 'maroon',
+    color: 'crimson',
+    // color: 'linear-gradient(to right, salmon, red, orange, yellow, lime, cyan, blue, purple, MediumOrchid)',
     borderRadius: 15,
     k: 0,
     kx: 0,
@@ -54,15 +56,13 @@ let cubeDop = {
 let map = {
     x: 100,
     y: 50,
-    borderWidth: 5,
     width: 0,
     height: 0,
-    widthMax: 1100,
+    widthMax: 1200,
     heightMax: 800,
-    widthMin: 800,
-    heightMin: 600,
+    widthMin: 300,
+    heightMin: 200,
     color: 'gray',
-    borderColor: 'black',
     //don,t change
     marginX: 0,
     marginY: 0,

@@ -30,11 +30,11 @@ function cubeInDel() {
     renderCube(cube);
 }
 function spawnCubeDop() {
-    cubeDop.k +=1;
     randomCubeDop();
+    cubeDop.k +=1;
     var ht = document.getElementById('map');
     ht.insertAdjacentHTML('beforeend', 
-    '<div id="cubeDop' + cubeDop.k + '" style="top: ' + cubeDop.ky + 'px;left: ' + cubeDop.kx + 'px; height: ' + cubeDop.height + 'px; width: ' + cubeDop.width + 'px; background-color: ' + cubeDop.color + '; border-radius: ' + cubeDop.borderRadius + 'px; position: absolute;"></div>'
+    '<div id="cubeDop' + cubeDop.k + '" style="top: ' + cubeDop.ky + 'px;left: ' + cubeDop.kx + 'px; height: ' + cubeDop.height + 'px; width: ' + cubeDop.width + 'px; background: ' + cubeDop.color + '; border-radius: ' + cubeDop.borderRadius + 'px; position: absolute;"></div>'
     );
 }
 //keyboard
@@ -240,6 +240,18 @@ function checkButton(event) {
         console.log("black");
         cube.color = 'black';
     }
+    if (event.keyCode === 32) {
+        console.log("randow");
+        if (cube.kColor === 0) {
+            cube.c = cube.color;
+            document.getElementById('cube').style.background = 'linear-gradient(to right, salmon, red, orange, yellow, lime, cyan, blue, purple, MediumOrchid)';
+            cube.kColor = 1;
+        }
+        else {
+            document.getElementById('cube').style.background = 'none';
+            cube.kColor = 0;
+        }
+    }
     //shadow
     if (event.keyCode === 70) {
         console.log("F");
@@ -330,7 +342,6 @@ function renderMap(map) {
     document.getElementById(map.id).style.left = map.x + 'px';
     document.getElementById(map.id).style.width = map.width + 'px';
     document.getElementById(map.id).style.height = map.height + 'px';
-    document.getElementById(map.id).style.border = map.borderWidth + 'px solid ' + map.borderColor;
     document.getElementById(map.id).style.backgroundColor = map.color;
 }
 function spawnMap(map) {
@@ -340,10 +351,10 @@ function spawnMap(map) {
     return map;
 }
 function spawnCube(map, cube) {
-    let mapMinX = map.marginX;
-    let mapMaxX = map.marginX + map.width - cube.width;
-    let mapMinY = map.marginY;
-    let mapMaxY = map.marginY + map.height - cube.height;
+    let mapMinX = map.x;
+    let mapMaxX = map.x + map.width - cube.width;
+    let mapMinY = map.y;
+    let mapMaxY = map.y + map.height - cube.height;
     cube.x = mapMinX + Math.floor(Math.random() * (mapMaxX - mapMinX));
     cube.y = mapMinY + Math.floor(Math.random() * (mapMaxY - mapMinY));
 
