@@ -35,7 +35,7 @@ function checkButton(event) {
         console.log("ArrowRight");
         if (cubeRight < mapRight) {
             if ((mapRight - cubeRight) < cube.step) {
-                cube.x += mapBottom - cubeBottom;
+                cube.x = mapBottom - cubeBottom;
             }
             else {
                 cube.x += cube.step;

@@ -1,7 +1,3 @@
-//ввести новые переменные (низ, верх, бок куба)
-//random spawn
-//random size map
-//rando cube рядом
 
 let cube = {
     id: 'cube',
@@ -14,25 +10,24 @@ let cube = {
     widthMax: 300,
     heightMax: 300,
     trnstn: .25,
-    //rotate
-    rotate: 0,
-    rotateStep: 15,
+    color: 'white',
     //action
     step: 50,
     //size change
     sStep: 50,
-    color: 'white',
     //border-radius
     borderMin: 0,
     borderStep: 10,
+    //borders
+    borderWidth: 0,
+    borderColor: 'blue',
     //don,t change
     borderRadius: 0,
     borderMax: 0,
     sizeStep: 0,
     shadow: 0,
     k: 0,
-    r: 0,
-    i: 0,
+    c: 0,
 }
 let cubeIn = {
     x: 0,
@@ -43,15 +38,29 @@ let cubeIn = {
     opacity: 0,
     trnstn: .25,
     color: 'black',
+    k1: 0,
+}
+let cubeDop = {
+    x: 0,
+    y: 0,
+    height: 30,
+    width: 30,
+    color: 'maroon',
+    borderRadius: 15,
     k: 0,
-    c: 0,
+    kx: 0,
+    ky: 0,
 }
 let map = {
-    x: 200,
-    y: 100,
+    x: 100,
+    y: 50,
     borderWidth: 5,
-    width: 500,
-    height: 500,
+    width: 0,
+    height: 0,
+    widthMax: 1100,
+    heightMax: 800,
+    widthMin: 800,
+    heightMin: 600,
     color: 'gray',
     borderColor: 'black',
     //don,t change
@@ -61,5 +70,7 @@ let map = {
 }
 
 renderMargin();
-renderMap(map);
-renderCube(cube);
+renderMap(spawnMap(map));
+renderCube(spawnCube(map, cube));
+renderCubeIn(cubeIn);
+// spawnCubeDop(spawnCubeDop(spawnCubeDop(spawnCubeDop(spawnCubeDop()))));
