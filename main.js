@@ -1,3 +1,14 @@
+let map = {
+    x: 0,
+    y: 0,
+    width: window.innerWidth,
+    height: window.innerHeight,
+    color: '#999999',
+    c: 0,
+    id: 'map',
+}
+
+let img = {k: 0}
 
 let cube = {
     id: 'cube',
@@ -11,24 +22,31 @@ let cube = {
     heightMax: 300,
     trnstn: .25,
     color: 'white',
+    c: 0,
     //action
-    step: 50,
+    step: 20,
     //size change
     sStep: 50,
+    //shadow
+    shadowWidth: 0,
+    shadowMinus: 0,
+    shadowMargin: 0,
+    shadowColor: 0,
     //border-radius
     borderMin: 0,
     borderStep: 10,
     //borders
     borderWidth: 0,
-    borderColor: 'blue',
+    borderColor: 'black',
     //don,t change
     borderRadius: 0,
+    b: 0,
     borderMax: 0,
+    rotate: 0,
+    r: 0,
     sizeStep: 0,
-    shadow: 0,
+    password: 10,
     k: 0,
-    c: 0,
-    kColor: 0,
 }
 let cubeIn = {
     x: 0,
@@ -46,31 +64,49 @@ let cubeDop = {
     y: 0,
     height: 30,
     width: 30,
-    color: 'crimson',
+    color: 'maroon',
     // color: 'linear-gradient(to right, salmon, red, orange, yellow, lime, cyan, blue, purple, MediumOrchid)',
     borderRadius: 15,
     k: 0,
     kx: 0,
     ky: 0,
 }
-let map = {
-    x: 100,
-    y: 50,
-    width: 0,
-    height: 0,
-    widthMax: 1200,
-    heightMax: 800,
-    widthMin: 300,
-    heightMin: 200,
-    color: 'gray',
-    //don,t change
-    marginX: 0,
-    marginY: 0,
-    id: 'map',
+
+let bots = [];
+let bot = {
+    id: 1,
+    x: 0,
+    y: 0,
+    width: 80,
+    height: 80,
+    trnstn: .25,
+    step: 20,
+    color: 'yellow'
+};
+bots.push(bot);
+
+let buffs = [];
+let buff = {
+    id: 2,
+    x: 200,
+    y: 200,
+    width: 56,
+    height: 56,
+    trnstn: .25,
+    color: 'purple'
+};
+buffs.push(buff);
+
+let paint = {
+    k: 0,
+    x: 0,
+    y: 0,
 }
 
 renderMargin();
-renderMap(spawnMap(map));
+renderMap(map);
 renderCube(spawnCube(map, cube));
-renderCubeIn(cubeIn);
-// spawnCubeDop(spawnCubeDop(spawnCubeDop(spawnCubeDop(spawnCubeDop()))));
+renderBots(bots);
+renderBuffs(buffs);
+
+let tik = setInterval(() => timeTik(), 250);

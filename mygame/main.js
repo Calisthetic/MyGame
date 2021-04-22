@@ -48,4 +48,4 @@ renderCube(spawnCube(map, cube));
 renderBots(bots);
 renderBuffs(buffs);
 
-let tik = setInterval(timeTik(), 1000);
+let tik = setInterval(() => timeTik(), 1000);
