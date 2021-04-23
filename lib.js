@@ -4,8 +4,8 @@ window.onmousedown = function(event){
     is_active = true;
     x = event.clientX;
     y = event.clientY;
-    var oo = document.getElementById('map');
-    oo.insertAdjacentHTML('beforeend', '<div style="height: 20px; width: 20px; background-color: black; position: absolute; top: ' + (y - 10) + 'px; left: ' + (x - 10) + 'px; border-radius: 10px"></div>');
+    var primer = document.getElementById('map');
+    primer.insertAdjacentHTML('beforeend', '<div style="height: 20px; width: 20px; background-color: black; position: absolute; top: ' + (y - 10) + 'px; left: ' + (x - 10) + 'px; border-radius: 10px"></div>');
 }
 window.onmouseup = function(event) {
     is_active = false;
@@ -14,49 +14,12 @@ window.onmouseup = function(event) {
 //cubeIn click
 cube.onclick = function() {
     setTimeout(alert("Click"), 1000);
-    let elements = 18;
-    let players = 3;
-    let rounds = (elements) / players;
-    let round = 1;
-    let r = 1;
-    let player = {
-        one: 0,
-        two: 0,
-        three: 0,
-    }
-    let pp = 0;
-    let kk = 0;
-    while (kk < elements) {
-        kk++;
-        if (r === 1) {
-            r = 2;
-            player.one += kk;
-            console.log(player.one + ' элемент(a/ов) за ' + round + ' круг у игрока 1');
-        }
-        else if (r === 2) {
-            r = 3;
-            player.two += kk;
-            console.log(player.two + ' элемент(a/ов) за ' + round + ' круг у игрока 2');
-        }
-        else if (r === 3) {
-            r = 1;
-            player.three += kk;
-            console.log(player.three + ' элемент(a/ов) за ' + round + ' круг у игрока 3');
-            round += 1;
-        }
-    }
-    console.log('Всего:');
-    console.log(elements + ' элементов');
-    console.log(rounds + ' кругов');
-    console.log('1 игрок' + ' сделал ' + player.one + ' элемент')
-    console.log('2 игрок' + ' сделал ' + player.two + ' элементов')
-    console.log('3 игрок' + ' сделал ' + player.three + ' элемента')
 }
 function spawnImg() {
     if (img.k === 0) {
         var imgg = document.getElementById('bot_1');
         imgg.insertAdjacentHTML('beforeend', 
-        '<img src="./images/leha2.jpg" id="img" class="img" style="height: ' + bot.height + 'px; width: ' + bot.width + 'px; border-radius: ' + bot.height / 2 + 'px;">'
+        '<img src="./images/gosha1.jpg" id="img" class="img" style="height: ' + bot.height + 'px; width: ' + bot.width + 'px; border-radius: ' + bot.height / 2 + 'px;">'
         );
         img.k = 1;
         renderBot(bot);
@@ -276,6 +239,13 @@ function checkButton(event) {
         cube.shadowColor = 'black';
         cube.c = 'black';
     }
+    //test
+    // if (event.keyCode === 67) {
+    //     console.log("test");
+    //     var t = Math.floor(Math)
+    //     var testo = document.getElementById('map');
+    //     testo.insertAdjacentHTML('beforeend', '<div style="height: 20px; width: 20px; background-color: maroon; position: absolute; top: ' + (ty - 10) + 'px; left: ' + (tx - 10) + 'px; border-radius: 10px"></div>');
+    // }
     //password: 2468 for cool skin
     if (event.keyCode === 98) {
         if (cube.password === 10) {
