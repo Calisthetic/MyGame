@@ -72,7 +72,7 @@ function renderMap(map) {
     document.getElementById('map').style.left = map.x + 'px';
     document.getElementById('map').style.width = map.width + 'px';
     document.getElementById('map').style.height = map.height + 'px';
-    document.getElementById('map').style.backgroundColor = map.color;
+    document.getElementById('map').style.background = map.color;
 }
 
 function spawnCube(map, cube) {
@@ -125,6 +125,16 @@ function renderBuff(buff) {
 
 }
 
-function timeTik() {
+function timeTik(game) {
     console.log(new Date().getSeconds());
+
+    buffsLogic(game);
+    botsLogic(game);
+}
+function buffsLogic(game) {
+    game.plusCounter();
+    renderBuffs(game.getBuffs());
+}
+function botsLogic(game) {
+    renderBots(game.getBots());
 }

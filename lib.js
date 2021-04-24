@@ -19,7 +19,7 @@ function spawnImg() {
     if (img.k === 0) {
         var imgg = document.getElementById('bot_1');
         imgg.insertAdjacentHTML('beforeend', 
-        '<img src="./images/gosha1.jpg" id="img" class="img" style="height: ' + bot.height + 'px; width: ' + bot.width + 'px; border-radius: ' + bot.height / 2 + 'px;">'
+        '<img src="./images/prank1.jpg" id="img" class="img" style="height: ' + bot.height + 'px; width: ' + bot.width + 'px; border-radius: ' + bot.height / 2 + 'px;">'
         );
         img.k = 1;
         renderBot(bot);
@@ -394,14 +394,14 @@ function renderBuff(buff) {
 }
 function renderCD() {
     if (cubeDop.c === 1) {
-        //?
+        document.getElementsByClassName("CubeD").style.backgroundColor = 'black';
     }
 }
 function spawnCD() {
     var tx = Math.floor(Math.random() * (map.width - cubeDop.width));
     var ty = Math.floor(Math.random() * (map.height - cubeDop.height));
     var testo = document.getElementById('map');
-    testo.insertAdjacentHTML('beforeend', '<div id="CubeD" style="height: ' + cubeDop.height + 'px; width: ' + cubeDop.width + 'px; background-color: ' + cubeDop.color + '; position: absolute; top: ' + ty + 'px; left: ' + tx + 'px; border-radius: ' + cubeDop.borderRadius + 'px"></div>');
+    testo.insertAdjacentHTML('beforeend', '<div id="CubeD" class="CubeD" style="height: ' + cubeDop.height + 'px; width: ' + cubeDop.width + 'px; background-color: ' + cubeDop.color + '; position: absolute; top: ' + ty + 'px; left: ' + tx + 'px; border-radius: ' + cubeDop.borderRadius + 'px"></div>');
     
 }
 function timeTik() {
