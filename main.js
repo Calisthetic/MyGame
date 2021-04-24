@@ -64,12 +64,12 @@ let cubeDop = {
     y: 0,
     height: 30,
     width: 30,
-    color: 'maroon',
+    color: 'green',
     // color: 'linear-gradient(to right, salmon, red, orange, yellow, lime, cyan, blue, purple, MediumOrchid)',
     borderRadius: 15,
     k: 0,
-    kx: 0,
-    ky: 0,
+    c: 0,
+    trnstn: .25,
 }
 
 let bots = [];
@@ -110,3 +110,4 @@ renderBots(bots);
 renderBuffs(buffs);
 
 let tik = setInterval(() => timeTik(), 250);
+let testTik = setInterval(() => renderCD(), 2000);

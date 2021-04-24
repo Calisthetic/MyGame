@@ -240,12 +240,11 @@ function checkButton(event) {
         cube.c = 'black';
     }
     //test
-    // if (event.keyCode === 67) {
-    //     console.log("test");
-    //     var t = Math.floor(Math)
-    //     var testo = document.getElementById('map');
-    //     testo.insertAdjacentHTML('beforeend', '<div style="height: 20px; width: 20px; background-color: maroon; position: absolute; top: ' + (ty - 10) + 'px; left: ' + (tx - 10) + 'px; border-radius: 10px"></div>');
-    // }
+    if (event.keyCode === 67) {
+        console.log("test");
+        spawnCD();
+        cubeDop.c = 1;
+    }
     //password: 2468 for cool skin
     if (event.keyCode === 98) {
         if (cube.password === 10) {
@@ -393,7 +392,18 @@ function renderBuff(buff) {
     document.getElementById('buff_' + buff.id).style.opacity = 0;
 
 }
-
+function renderCD() {
+    if (cubeDop.c === 1) {
+        //?
+    }
+}
+function spawnCD() {
+    var tx = Math.floor(Math.random() * (map.width - cubeDop.width));
+    var ty = Math.floor(Math.random() * (map.height - cubeDop.height));
+    var testo = document.getElementById('map');
+    testo.insertAdjacentHTML('beforeend', '<div id="CubeD" style="height: ' + cubeDop.height + 'px; width: ' + cubeDop.width + 'px; background-color: ' + cubeDop.color + '; position: absolute; top: ' + ty + 'px; left: ' + tx + 'px; border-radius: ' + cubeDop.borderRadius + 'px"></div>');
+    
+}
 function timeTik() {
     //console.log(new Date().getSeconds());
     stepBot();
