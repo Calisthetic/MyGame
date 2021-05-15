@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            background-color: white;
+            overflow: hidden;
+        }
+
+        .Cube {
+            background: linear-gradient(to right, #ff0000, orange , #ffff00, lime, DeepSkyBlue, #5555ff, BlueViolet, #ff0000, orange , #ffff00, lime, DeepSkyBlue, #5555ff, BlueViolet);
+            animation: Cube_animation 2s linear  infinite;
+            background-size: 400% 100%;
+        }
+        @keyframes Cube_animation {
+            0%{
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 54% 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="fon">
+        <div id="map"></div>
+        <div id="circle"></div>
+    </div>
+    <script src="lupa.js" defer></script>
+</body>
+</html>

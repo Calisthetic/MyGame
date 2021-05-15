@@ -1,15 +1,16 @@
 document.onkeydown = checkButton;
 
-window.onmousedown = function(event){
-    is_active = true;
-    x = event.clientX;
-    y = event.clientY;
-    var primer = document.getElementById('map');
-    primer.insertAdjacentHTML('beforeend', '<div style="height: 20px; width: 20px; background-color: black; position: absolute; top: ' + (y - 10) + 'px; left: ' + (x - 10) + 'px; border-radius: 10px"></div>');
-}
-window.onmouseup = function(event) {
-    is_active = false;
-}
+//paint for click
+// window.onmousedown = function(event){
+//     is_active = true;
+//     x = event.clientX;
+//     y = event.clientY;
+//     var primer = document.getElementById('map');
+//     primer.insertAdjacentHTML('beforeend', '<div style="height: 20px; width: 20px; background-color: black; position: absolute; top: ' + (y - 10) + 'px; left: ' + (x - 10) + 'px; border-radius: 10px"></div>');
+// }
+// window.onmouseup = function(event) {
+//     is_active = false;
+// }
 
 //cubeIn click
 cube.onclick = function() {
@@ -242,8 +243,12 @@ function checkButton(event) {
     //test
     if (event.keyCode === 67) {
         console.log("test");
+        cubeDop.k += 1;
         spawnCD();
-        cubeDop.c = 1;
+    }
+    if (event.keyCode === 86) {
+        console.log("V");
+        renderRainbow();
     }
     //password: 2468 for cool skin
     if (event.keyCode === 98) {
@@ -393,16 +398,136 @@ function renderBuff(buff) {
 
 }
 function renderCD() {
-    if (cubeDop.c === 1) {
-        document.getElementsByClassName("CubeD").style.backgroundColor = 'black';
+    let tx = Math.floor(Math.random() * (map.width - cubeDop.width));
+    let ty = Math.floor(Math.random() * (map.height - cubeDop.height));
+    document.getElementById('cubeDop_' + cubeDop.k).style.height = cubeDop.height + 'px';
+    document.getElementById('cubeDop_' + cubeDop.k).style.width = cubeDop.width + 'px';
+    document.getElementById('cubeDop_' + cubeDop.k).style.background = cubeDop.color;
+    document.getElementById('cubeDop_' + cubeDop.k).style.position = 'absolute';
+    document.getElementById('cubeDop_' + cubeDop.k).style.top = ty + 'px';
+    document.getElementById('cubeDop_' + cubeDop.k).style.left = tx + 'px';
+    document.getElementById('cubeDop_' + cubeDop.k).style.borderRadius = cubeDop.borderRadius + 'px';
+    document.getElementById('cubeDop_' + cubeDop.k).style.transition = 'ease ' + cubeDop.trnstn + 's';
+}
+function renderCDs() {
+    let i = 0;
+    if (cubeDop.v === 0) {
+        if (cubeDop.t === 0) {
+            cubeDop.c1 += 15;
+            //render all blocks
+            while (i < cubeDop.k) {
+                i += 1;
+                //document.getElementById('cubeDop_' + i).style.background = 'rgb(' + 255 + ', ' + cubeDop.c1 + ', ' + 0 + ')';
+                document.getElementById('cubeDop_' + i).style.background = 'red';
+            }
+            if (cubeDop.c1 === 105) {
+                cubeDop.t = 1;
+            }
+        }
+        else if (cubeDop.t === 1) {
+            cubeDop.c1 -= 15;
+            while (i < cubeDop.k) {
+                i++;
+                // document.getElementById('cubeDop_' + i).style.background = 'rgb(' + 255 + ', ' + cubeDop.c1 + ', ' + 0 + ')';
+                document.getElementById('cubeDop_' + i).style.background = 'orange';
+            }
+            if (cubeDop.c1 === 0) {
+                cubeDop.t = 2;
+            }
+        }
+        else if (cubeDop.t === 2) {
+            cubeDop.c1 += 15;
+            while (i < cubeDop.k) {
+                i += 1;
+                document.getElementById('cubeDop_' + i).style.background = 'yellow';
+            }
+            if (cubeDop.c1 === 105) {
+                cubeDop.t = 3;
+            }
+        }
+        else if (cubeDop.t === 3) {
+            cubeDop.c1 -= 15;
+            while (i < cubeDop.k) {
+                i += 1;
+                document.getElementById('cubeDop_' + i).style.background = 'lime';
+            }
+            if (cubeDop.c1 === 0) {
+                cubeDop.t = 4;
+            }
+        }
+        else if (cubeDop.t === 4) {
+            cubeDop.c1 += 15;
+            while (i < cubeDop.k) {
+                i += 1;
+                document.getElementById('cubeDop_' + i).style.background = 'DeepSkyBlue';
+            }
+            if (cubeDop.c1 === 105) {
+                cubeDop.t = 5;
+            }
+        }
+        else if (cubeDop.t === 5) {
+            cubeDop.c1 -= 15;
+            while (i < cubeDop.k) {
+                i += 1;
+                document.getElementById('cubeDop_' + i).style.background = '#5555ff';
+            }
+            if (cubeDop.c1 === 0) {
+                cubeDop.t = 6;
+            }
+        }
+        else if (cubeDop.t === 6) {
+            cubeDop.c1 += 15;
+            while (i < cubeDop.k) {
+                i += 1;
+                document.getElementById('cubeDop_' + i).style.background = 'BlueViolet';
+            }
+            if (cubeDop.c1 === 105) {
+                cubeDop.t = 7;
+            }
+        }
+        else if (cubeDop.t === 7) {
+            cubeDop.c1 -= 15;
+            while (i < cubeDop.k) {
+                i += 1;
+                document.getElementById('cubeDop_' + i).style.background = 'Crimson';
+            }
+            if (cubeDop.c1 === 0) {
+                cubeDop.t = 0;
+            }
+        }
     }
 }
+function renderRainbow() {
+    let i = 0;
+        if (cubeDop.v === 0) {
+            cubeDop.v = 1;
+            while (i < cubeDop.k) {
+                i += 1;
+                document.getElementById('cubeDop_' + i).style.background = 'linear-gradient(to right, #ff0000, orange , #ffff00, lime, DeepSkyBlue, #5555ff, BlueViolet, #ff0000, orange , #ffff00, lime, DeepSkyBlue, #5555ff, BlueViolet)';
+                document.getElementById('cubeDop_' + i).style.backgroundSize = '400% 100%';
+                document.getElementById('cubeDop_' + i).style.animation = 'CubeDop_animation 2s linear  infinite';
+            }
+        }
+        else if (cubeDop.v === 1) {
+            cubeDop.v = 0;
+            cubeDop.t = 0;
+            while (i < cubeDop.k) {
+                i += 1;
+                document.getElementById('cubeDop_' + i).style.background = 'white';
+                document.getElementById('cubeDop_' + i).style.backgroundSize = '100% 100%';
+                document.getElementById('cubeDop_' + i).style.animation = '0';
+            }
+        }
+}
 function spawnCD() {
-    var tx = Math.floor(Math.random() * (map.width - cubeDop.width));
-    var ty = Math.floor(Math.random() * (map.height - cubeDop.height));
-    var testo = document.getElementById('map');
-    testo.insertAdjacentHTML('beforeend', '<div id="CubeD" class="CubeD" style="height: ' + cubeDop.height + 'px; width: ' + cubeDop.width + 'px; background-color: ' + cubeDop.color + '; position: absolute; top: ' + ty + 'px; left: ' + tx + 'px; border-radius: ' + cubeDop.borderRadius + 'px"></div>');
-    
+    var pipka = document.getElementById('map');
+    pipka.insertAdjacentHTML('beforeend', '<div id="cubeDop_' + cubeDop.k + '" class="CubeDop"></div>');
+    renderCD();
+    if (cubeDop.v === 1) {
+        document.getElementById('cubeDop_' + cubeDop.k).style.background = 'linear-gradient(to right, #ff0000, orange , #ffff00, lime, DeepSkyBlue, #5555ff, BlueViolet, #ff0000, orange , #ffff00, lime, DeepSkyBlue, #5555ff, BlueViolet)';
+        document.getElementById('cubeDop_' + cubeDop.k).style.backgroundSize = '400% 100%';
+        document.getElementById('cubeDop_' + cubeDop.k).style.animation = 'CubeDop_animation 2s linear  infinite';
+    }
 }
 function timeTik() {
     //console.log(new Date().getSeconds());

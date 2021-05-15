@@ -48,29 +48,25 @@ let cube = {
     password: 10,
     k: 0,
 }
-let cubeIn = {
-    x: 0,
-    y: 0,
-    height: 0,
-    width: 0,
-    borderRadius: 0,
-    opacity: 0,
-    trnstn: .25,
-    color: 'black',
-    k1: 0,
-}
 let cubeDop = {
     x: 0,
     y: 0,
     height: 30,
     width: 30,
-    color: 'red',
+    color: 'white',
     // color: 'linear-gradient(to right, salmon, red, orange, yellow, lime, cyan, blue, purple, MediumOrchid)',
     borderRadius: 15,
+    //counter
     k: 0,
-    c: 0,
-    trnstn: .25,
-}
+    //rgb color
+    c1: 0,
+    //rainbow count
+    t: 0,
+    //for V
+    v: 0,
+    trnstn: 2.2,
+    speed: 100,
+};
 
 let bots = [];
 let bot = {
@@ -110,4 +106,4 @@ renderBots(bots);
 renderBuffs(buffs);
 
 let tik = setInterval(() => timeTik(), 250);
-let testTik = setInterval(() => renderCD(), 2000);
+let testTik = setInterval(() => renderCDs(), cubeDop.speed);

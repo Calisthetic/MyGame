@@ -30,12 +30,44 @@
             position: absolute;
             color: rgb(117, 66, 66);
         }
+        .test {
+            opacity: 0;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(
+                circle at 50% 50%,
+                rgba(255, 255, 255, 0) 30%,
+                #5630C3 30%,
+                #5630C3,
+                #0225F3,
+                #2AC3FC,
+                #41C903,
+                #FEF506,
+                #FE9307,
+                #FE080D 70%,
+                rgba(255, 255, 255, 0) 70%,
+                rgba(255, 255, 255, 0)
+            );
+        }
+        .CubeDop {
+            /* background: linear-gradient(to right, #ff0000, orange , #ffff00, lime, DeepSkyBlue, #5555ff, BlueViolet, #ff0000, orange , #ffff00, lime, DeepSkyBlue, #5555ff, BlueViolet); */
+            /* animation: CubeDop_animation 2s linear  infinite; */
+            background-size: 400% 100%;
+        }
+        @keyframes CubeDop_animation {
+            0%{
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 71.7% 0;
+            }
+        }
         /* #acc {background: linear-gradient(to right, red, orange, yellow,lime, cyan, blue, violet);} */
     </style>
 </head>
 <body>
-    <div id="map"></div>
-    <div id="cube"></div>
+    <div id="map"><div class="test"></div></div>
+    <div id="cube"></div></div>
     <script src="lib.js" defer></script>
     <script src="main.js" defer></script>
 </body>
