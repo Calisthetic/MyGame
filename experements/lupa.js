@@ -27,6 +27,7 @@ let cube = {
     k: 0,
     //rejim
     t: 0,
+    b: 0,
 }
 let map = {
     x: 0,
@@ -50,7 +51,21 @@ function checkButton(event) {
     }
     if (event.keyCode === 66) {
         console.log("B");
-        animationCircle();
+        let i = 0;
+        if (cube.b === 0) {
+            cube.b = 1;
+            while (i < cube.k) {
+                i += 1;
+                document.getElementById('cube_' + i).style.opacity = 0;
+            }
+        }
+        else if (cube.b === 1) {
+            cube.b = 0;
+            while (i < cube.k) {
+                i += 1;
+                document.getElementById('cube_' + i).style.opacity = 1;
+            }
+        }
     }
     if (event.keyCode === 67) {
         if (cube.k < sp.max) {
