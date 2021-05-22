@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #board, #count, #count_name, #count_, #count_number, #restart_fon, #restart_nfon, #restart {
+            position: absolute;
+        }
+        #record, #record_name, #record_, #record_number {
+            position: absolute;
+        }
+        #map, #cube {
+            position: absolute;
+        }
+        #demo {
+            position: absolute;
+            font-size: 20px;
+            font-weight: 500;
+        }
+        .bot, .buff {
+            position: absolute;
+        }
+        .restart_nfon:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="cube"></div>
+    <div id="board">
+        <div id="count">
+            <div id="count_"><div id="demo"></div></div>
+            <div id="count_name">Count</div>
+        </div>
+        <div id="record">
+            <div id="record_"></div>
+            <div id="record_name">Record</div>
+        </div>
+        <div id="restart_fon">
+            <div id="restart_nfon" class="restart_nfon">
+                <div id="restart" class="restart"><div id="restart_name">NEW GAME</div></div>
+            </div>
+        </div>
+    </div>
+    <!-- <div id="1" class="bot"></div> -->
+    <script src="lib.js" defer></script>
+    <script src="main.js" defer></script>
+</body>
+</html>
