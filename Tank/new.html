@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Танчики</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            background-color: white;
+            overflow: hidden;
+        }
+        #tank, #corp, #dulo, #map, #fon, #patron {
+            position: absolute;
+        }
+        #bot, #botCenter, #bot1, #bot2, #bot3, #bot4, #patronBot {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="fon">
+        <div id="map">
+            <div id="tank">
+                <div id="corp"></div>
+                <div id="dulo"></div>
+            </div>
+            <div id="bot">
+                <div id="bot1"></div>
+                <div id="bot2"></div>
+                <div id="bot3"></div>
+                <div id="bot4"></div>
+                <div id="trash"><div id="botCenter"></div></div>
+            </div>
+        </div>
+    </div>
+    <script src="lib.js" defer></script>
+    <script src="moving.js" defer></script>
+</body>
+</html>
