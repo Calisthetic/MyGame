@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard</title>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            background-color: white;
+            overflow: hidden;
+        }
+        .all {
+            display: inline-block;
+            text-align: center;
+            margin-top: 3px;
+            font-weight: 500;
+            border: 2px solid black;
+            border-radius: 5px;
+            background-color: black;
+            color: silver;
+        }
+        .size1 {
+            font-size: 20px;
+            line-height: 38px;
+            width: 40px;
+            height: 40px;
+        }
+        .size2 {
+            font-size: 16px;
+            line-height: 42px;
+            width: 40px;
+            height: 40px;
+        }
+        .size3 {
+            font-size: 14px;
+            line-height: 44px;
+            width: 40px;
+            height: 40px;
+        }
+        .ctrl {
+            font-size: 20px;
+            line-height: 38px;
+            width: 60px;
+            height: 40px;
+        }
+        .space {
+            font-size: 20px;
+            line-height: 38px;
+            width: 300px;
+            height: 40px;
+        }
+        .tab {
+            font-size: 20px;
+            line-height: 38px;
+            width: 64px;
+            height: 40px;
+        }
+        .enter11 {
+            font-size: 20px;
+            line-height: 38px;
+            width: 64px;
+            height: 50px;
+            color: black;
+        }
+        .enter12 {
+            font-size: 20px;
+            line-height: 38px;
+            width: 104px;
+            height: 40px;
+        }
+        .enter21 {
+            font-size: 16px;
+            line-height: 42px;
+            width: 40px;
+            height: 86px;
+        }
+        .plus1 {
+            font-size: 20px;
+            line-height: 38px;
+            width: 40px;
+            height: 86px;
+        }
+        .shift1 {
+            font-size: 20px;
+            line-height: 38px;
+            width: 96px;
+            height: 40px;
+        }
+        .shift2 {
+            font-size: 20px;
+            line-height: 38px;
+            width: 128px;
+            height: 40px;
+        }
+        .caps {
+            font-size: 20px;
+            line-height: 38px;
+            width: 72px;
+            height: 40px;
+        }
+        .alt {
+            font-size: 20px;
+            line-height: 38px;
+            width: 47px;
+            height: 40px;
+        }
+        .page {
+            font-size: 16px;
+            line-height: 14px;
+            width: 40px;
+            height: 40px;
+        }
+        .zero {
+            font-size: 20px;
+            line-height: 38px;
+            width: 89px;
+            height: 40px;
+        }
+        .part1 {margin-left: 6px;}
+        .part2 {margin-left: 54px;}
+        .part3 {margin-left: 156px;}
+        .part4 {margin-left: 21px;}
+        .part5 {margin-left: 15px;}
+        .lighter {
+            display: inline-block;
+            text-align: center;
+            margin-top: 3px;
+            font-weight: 500;
+            border: 3px groove black;
+            border-radius: 25px;
+            background-color: #454545;
+            font-size: 16px;
+            line-height: 42px;
+            width: 40px;
+            height: 40px;
+            color: silver;
+        }
+        .floor1 {
+            position: absolute;
+            top: 0px;
+            left: 4px;
+        }
+        .floor2 {
+            position: absolute;
+            top: 54px;
+            left: 4px;
+        }
+        .floor3 {
+            position: absolute;
+            top: 100px;
+            left: 4px;
+        }
+        .floor4 {
+            position: absolute;
+            top: 146px;
+            left: 4px;
+        }
+        .floor5 {
+            position: absolute;
+            top: 192px;
+            left: 4px;
+        }
+        .floor6 {
+            position: absolute;
+            top: 238px;
+            left: 4px;
+        }
+        .text {
+            position: absolute;
+            top: 300px;
+            left: 0px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="keyboard">
+        <div class="floor1">
+            <div id="27" class="all size1">Esc</div>
+            <div id="112" class="all size1 part2">F1</div>
+            <div id="113" class="all size1">F2</div>
+            <div id="114" class="all size1">F3</div>
+            <div id="115" class="all size1">F4</div>
+            <div id="116" class="all size1 part4">F5</div>
+            <div id="117" class="all size1">F6</div>
+            <div id="118" class="all size1">F7</div>
+            <div id="119" class="all size1">F8</div>
+            <div id="120" class="all size1 part4">F9</div>
+            <div id="121" class="all size1">F10</div>
+            <div id="122" class="all size1">F11</div>
+            <div id="123" class="all size1">F12</div>
+            <div id="44" class="all size3 part1">Screen</div>
+            <div id="145" class="all size3">Scroll</div>
+            <div id="19" class="all size2">Break</div>
+            <div id="num" class="lighter part5">Num</div>
+            <div id="caps" class="lighter part5">Caps</div>
+            <div id="scroll" class="lighter part5">Scroll</div>
+        </div>
+        <div class="floor2">
+            <div id="192" class="all size1">~</div>
+            <div id="49" class="all size1">1</div>
+            <div id="50" class="all size1">2</div>
+            <div id="51" class="all size1">3</div>
+            <div id="52" class="all size1">4</div>
+            <div id="53" class="all size1">5</div>
+            <div id="54" class="all size1">6</div>
+            <div id="55" class="all size1">7</div>
+            <div id="56" class="all size1">8</div>
+            <div id="57" class="all size1">9</div>
+            <div id="48" class="all size1">0</div>
+            <div id="189" class="all size1">-</div>
+            <div id="187" class="all size1">=</div>
+            <div id="220" class="all size1">\</div>
+            <div id="8" class="all size1">del</div>
+            <div id="45" class="all size3 part1">Insert</div>
+            <div id="36" class="all size2">Home</div>
+            <div id="33" class="all page">Page Up</div>
+            <div id="144" class="all size2 part1">Num</div>
+            <div id="111" class="all size1">/</div>
+            <div id="106" class="all size1">*</div>
+            <div id="109" class="all size1">-</div>
+        </div>
+        <div class="floor3">
+            <div id="9" class="all tab">Tab</div>
+            <div id="81" class="all size1">Q</div>
+            <div id="87" class="all size1">W</div>
+            <div id="69" class="all size1">E</div>
+            <div id="82" class="all size1">R</div>
+            <div id="84" class="all size1">T</div>
+            <div id="89" class="all size1">Y</div>
+            <div id="85" class="all size1">U</div>
+            <div id="73" class="all size1">I</div>
+            <div id="79" class="all size1">O</div>
+            <div id="80" class="all size1">P</div>
+            <div id="219" class="all size1">[</div>
+            <div id="221" class="all size1">]</div>
+            <div id="enter1" class="all enter11"><-</div>
+            <div id="46" class="all size3 part1">Delete</div>
+            <div id="35" class="all size2">End</div>
+            <div id="34" class="all page">Page Down</div>
+            <div id="103" class="all size1 part1">7</div>
+            <div id="104" class="all size1">8</div>
+            <div id="105" class="all size1">9</div>
+            <div id="107" class="all plus1">+</div>
+        </div>
+        <div class="floor4">
+            <div id="20" class="all caps">Caps</div>
+            <div id="65" class="all size1">A</div>
+            <div id="83" class="all size1">S</div>
+            <div id="68" class="all size1">D</div>
+            <div id="70" class="all size1">F</div>
+            <div id="71" class="all size1">G</div>
+            <div id="72" class="all size1">H</div>
+            <div id="74" class="all size1">J</div>
+            <div id="75" class="all size1">K</div>
+            <div id="76" class="all size1">L</div>
+            <div id="186" class="all size1">;</div>
+            <div id="222" class="all size1">"</div>
+            <div id="enter2" class="all enter12">Enter</div>
+            <div id="100" class="all size1 part3">4</div>
+            <div id="101" class="all size1">5</div>
+            <div id="102" class="all size1">6</div>
+        </div>
+        <div class="floor5">
+            <div id="shift1" class="all shift1">Shift</div>
+            <div id="90" class="all size1">Z</div>
+            <div id="88" class="all size1">X</div>
+            <div id="67" class="all size1">C</div>
+            <div id="86" class="all size1">V</div>
+            <div id="66" class="all size1">B</div>
+            <div id="78" class="all size1">N</div>
+            <div id="77" class="all size1">M</div>
+            <div id="188" class="all size1">,</div>
+            <div id="190" class="all size1">.</div>
+            <div id="191" class="all size1">/</div>
+            <div id="shift2" class="all shift2">Shift</div>
+            <div id="38" class="all size2 part2">Up</div>
+            <div id="97" class="all size1 part2">1</div>
+            <div id="98" class="all size1">2</div>
+            <div id="99" class="all size1">3</div>
+            <div id="enter3" class="all enter21">Enter</div>
+        </div>
+        <div class="floor6">
+            <div id="ctrl1" class="all ctrl">Ctrl</div>
+            <div id="91" class="all alt">Win</div>
+            <div id="alt1" class="all alt">Alt</div>
+            <div id="32" class="all space">Space</div>
+            <div id="alt2" class="all alt">Alt</div>
+            <div id="92" class="all alt">Win</div>
+            <div id="93" class="all alt">List</div>
+            <div id="ctrl2" class="all ctrl">Ctrl</div>
+            <div id="37" class="all size2 part1">Left</div>
+            <div id="40" class="all size2">Down</div>
+            <div id="39" class="all size2">Right</div>
+            <div id="96" class="all zero part1">0</div>
+            <div id="110" class="all size1">.</div>
+        </div>
+        <div class="text">
+            <div><b><u>Better don't press:</u></b></div>
+            <div><i>F1 - google support;</i></div>
+            <div><i>F3 - search engine;</i></div>
+            <div><i>F5 - refresh the page;</i></div>
+            <div><i>F6 - page address;</i></div>
+            <div><i>F7 - active cursor mode;</i></div>
+            <div><i>F11 - full-screen mode;</i></div>
+            <div><i>F12 - console;</i></div>
+            <div><i>Win - windows menu;</i></div>
+            <div><i>Screen - screenshot;</i></div>
+            <div><i></i></div>
+        </div>
+    </div>
+    <script src="main.js" defer></script>
+</body>
+</html>

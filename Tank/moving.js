@@ -347,39 +347,41 @@ function renderPatron() {
     if ((parton.px < 0) || (parton.px + car.width / 5 * 2 > map.width) || (parton.py < 0) || (parton.py + car.width / 5 * 2 > map.height)) {
         clearInterval(car.tik);
         car.tik = 0;
-        setTimeout(() => {document.getElementById('patron').remove();}, 100);
+        document.getElementById('patron').remove();
     }
     else if ((parton.px < bot.width + bot.x && parton.px > bot.x) || (parton.px + car.width / 5 * 2 > bot.x && parton.px + car.width / 5 * 2 < bot.x + car.width)) {
         if ((parton.py > bot.y && parton.py < bot.y + car.height) || (parton.py + car.height / 5 > bot.y && parton.py + car.height / 5 < bot.y + car.height)) {
             clearInterval(car.tik);
             car.tik = 0;
-            setTimeout(() => {document.getElementById('patron').remove();}, 100);
+            document.getElementById('patron').remove();
             bot.hp += 1;
             if (bot.hp >= 3) {
                 if (parton.count === 4) {
                     clearPatrons();
                     setTimeout(() => {result = confirm('Хорошая работа, не хотите победить более сильного врага?')}, 150);
                     bot.hp = 0;
-                    if (result) {
-                        if (bot.hTik === 0) {
-                            bot.hTik = setInterval(() => {renderBot();}, 250);
-                            clearInterval(bot.mTik);
-                            bot.rSpeed = 3;
-                            parton.count = 8;
-                            document.getElementById('bot4').style.opacity = 1;
-                            document.getElementById('bot3').style.opacity = 1;
+                    setTimeout(() => {
+                        if (result) {
+                            if (bot.hTik === 0) {
+                                bot.hTik = setInterval(() => {renderBot();}, 250);
+                                clearInterval(bot.mTik);
+                                bot.rSpeed = 3;
+                                parton.count = 8;
+                                document.getElementById('bot4').style.opacity = 1;
+                                document.getElementById('bot3').style.opacity = 1;
+                            }
+                            else {
+                                bot.mTik = setInterval(() => {renderBot();}, 250)
+                                bot.rSpeed = 1;
+                                clearInterval(bot.hTik);
+                                bot.hTik = 0;
+                                parton.count = 4;
+                                document.getElementById('bot4').style.opacity = 0;
+                                document.getElementById('bot3').style.opacity = 0;
+                                document.getElementById(bot.id).style.transform = 'rotate(0deg)';
+                            }
                         }
-                        else {
-                            bot.mTik = setInterval(() => {renderBot();}, 250)
-                            bot.rSpeed = 1;
-                            clearInterval(bot.hTik);
-                            bot.hTik = 0;
-                            parton.count = 4;
-                            document.getElementById('bot4').style.opacity = 0;
-                            document.getElementById('bot3').style.opacity = 0;
-                            document.getElementById(bot.id).style.transform = 'rotate(0deg)';
-                        }
-                    }
+                    }, 200);
                 }
                 else if (bot.hp === 5) {
                     if (bot.result === 0) {

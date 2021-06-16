@@ -16,18 +16,23 @@ let car = {
     rSpeed: 5,
     x: 500,
     y: 500,
-    speedNow: 20,
-    speedMax: 50,
-    speedMin: 0,
-    speedBackMax: 0,
+    speed: 10,
+    speedNow: 0,
     turbo: 1.5,
-    width: 40,
-    height: 80,
+    drift: 32,
+    width: 20,
+    height: 40,
     color: 'red',
-    trans: 0.25,
+    trans: 0.1,
     tik: 0,
     w: 0,
     s: 0,
+}
+let turbo = {
+    height: 0,
+    width: 10,
+    y: 0,
+    x: 0,
 }
 let key = {
     side: 0,
@@ -39,7 +44,6 @@ let key = {
     sh: false,
     sp: false,
 }
-let si = 0;
 let timer = {
     w: 0,
     s: 0,
@@ -48,6 +52,7 @@ let timer = {
     sh: 0,
     sp: 0,
 }
+let tim = setInterval(() => {renderWay(); renderCar();}, 40);
 
 setts();
 renderMap();
@@ -55,33 +60,41 @@ createCar();
 renderCar();
 
 function setts() {
-    car.speedBackMax = car.speedMax / 5;
-    car.speedMin = car.speedMax / 10;
-    map.height = map.mh;
-    map.width = map.mw;
+    map.height = map.mh - 100;
+    map.width = map.mw - 110;
+    map.x = 50;
+    map.y = 50;
+    turbo.height = map.height;
+    car.speedNow = car.speed;
 }
 
 document.onkeydown = function(event) {
     key.e = (event || window.event).keyCode;
-    if (key.e === 37 && key.a === false && key.d === false) {
+    if (key.e === 37 && key.a === false) {
         key.a = true;
-        key.side = 'a';
+        if (key.d === true) {key.d = false;}
         timer.a = setInterval(() => {
-            car.rotate -= car.rSpeed;
-            car.way -= car.rSpeed;
-            renderWay();
-            renderCar();
+            if ((key.w === true && key.a === true) || (key.s === true && key.a === true)) {
+                car.rotate -= car.rSpeed;
+                car.way -= car.rSpeed;
+            }
         }, 40);
+        if (key.sp === true) {
+            renderDrift();
+        }
     }
-    else if (key.e === 39 && key.d === false && key.a === false) {
+    else if (key.e === 39 && key.d === false) {
         key.d = true;
-        key.side = 'd';
+        if (key.a === true) {key.a = false;}
         timer.d = setInterval(() => {
-            car.rotate += car.rSpeed;
-            car.way += car.rSpeed;
-            renderWay();
-            renderCar();
+            if ((key.w === true && key.d === true) || (key.s === true && key.d === true)) {
+                car.rotate += car.rSpeed;
+                car.way += car.rSpeed;
+            }
         }, 40);
+        if (key.sp === true) {
+            renderDrift();
+        }
     }
     else if (key.e === 38 && key.w === false && key.s === false) {
         key.w = true;
@@ -106,7 +119,6 @@ document.onkeydown = function(event) {
                 car.y -= car.speedNow * (Math.sin((car.way - 270) * Math.PI / 180)) / Math.sin(Math.PI / 2);
                 car.x -= car.speedNow * (Math.sin((360 - car.way) * Math.PI / 180)) / Math.sin(Math.PI / 2);
             }
-            renderCar();
         }, 40);
     }
     else if (key.e === 40 && key.s === false && key.w === false) {
@@ -132,25 +144,38 @@ document.onkeydown = function(event) {
                 car.y += car.speedNow * (Math.sin((car.way - 270) * Math.PI / 180)) / Math.sin(Math.PI / 2);
                 car.x += car.speedNow * (Math.sin((360 - car.way) * Math.PI / 180)) / Math.sin(Math.PI / 2);
             }
-            renderCar();
         }, 40);
     }
     else if (key.e === 32 && key.sp === false) { 
         key.sp = true;
-        if ((key.w === true && key.a === true) || (key.sh === true && key.a === true)) {car.rotate -= 32; console.log(2); key.side = 'a';}
-        else if ((key.sh === true && key.d === true) || (key.w === true && key.d === true)) {car.rotate += 32; console.log(3); key.side = 'b';}
-        else if ((key.sh === true) || (key.w === true)) {
-            if (key.side === 'a') {car.rotate -= 32}
-            else if (key.side === 'b') {car.rotate += 32}
-        }
+        renderDrift();
         timer.sp = setInterval(() => {
-            console.log(1);
+            if (key.w === true) {
+                if ((key.w === true) || (key.sh === true)) {
+                    car.rotate += car.drift;
+                    car.way += car.drift;
+                }
+                if (key.sh === false) {
+                    if (turbo.height + map.height / 3 / 25 <= map.height) {
+                        turbo.height += map.height / 9 / 25;
+                        turbo.y -= map.height / 18 / 25;
+                    }
+                    else {turbo.height = map.height; turbo.y = 0;}
+                    renderTurbo();
+                }
+            }
         }, 40);
     }
-    else if (key.e === 16 && key.sh === false && key.w === true) {
+    else if (key.e === 16 && key.sh === false) {
         key.sh = true;
         timer.sh = setInterval(() => {
-            renderCar();
+            if (turbo.height - map.height / 3 / 25 > 0) {
+                turbo.height -= map.height / 3 / 25;
+                turbo.y += map.height / 3 / 25 / 2;
+                car.speedNow = car.speed * car.turbo;
+            }
+            else {car.speedNow = car.speed}
+            renderTurbo();
         }, 40);
     }
 }
@@ -178,16 +203,19 @@ document.onkeyup = function(event) {
         timer.s = 0;
     }
     else if (key.e === 32 && key.sp === true) {
-        console.log(si);
-        si = 0;
         key.sp = false;
         clearInterval(timer.sp);
         timer.sp = 0;
+        if (key.side === 1) {car.rotate += 32;}
+        else if (key.side === 2) {car.rotate -= 32;}
+        key.side = 0;
+        car.drift = 0;
     }
     else if (key.e === 16 && key.sh === true) {
         key.sh = false;
         clearInterval(timer.sh);
         timer.sh = 0;
+        car.speedNow = car.speed;
     }
 }
 
@@ -197,7 +225,6 @@ function renderWay() {
     if (car.way >= 360) {car.way = car.way - 360}
     else if (car.way < 0) {car.way = 360 + car.way}
 }
-
 function renderCar() {
     if ((car.way >= 315 && car.way < 360) || (car.way >= 0 && car.way <= 45) || (car.way >= 135 && car.way <= 225)) {
         if ((car.way >= 340 && car.way < 360) || (car.way >= 0 && car.way <= 20) || (car.way >= 160 && car.way <= 200)) {
@@ -235,6 +262,23 @@ function renderCar() {
     document.getElementById(car.id).style.transform = 'rotate(' + car.rotate + 'deg)';
 }
 
+function renderTurbo() {
+    document.getElementById('turbo').style.height = turbo.height + 'px';
+    document.getElementById('turbo').style.width = turbo.width + 'px';
+    document.getElementById('turbo').style.top = turbo.y + 'px';
+    document.getElementById('turbo').style.left = turbo.x + 'px';
+}
+function renderDrift() {
+    if (key.side === 0) {
+        if (key.a === true) {key.side = 1; car.rotate -= 32; car.drift = -2;}
+        else if (key.d === true) {key.side = 2; car.rotate += 32; car.drift = 2;}
+    }
+    else {
+        if (key.d === true) {car.rotate += 64; car.drift = 2; key.side = 2;}
+        else if (key.a === true) {car.rotate -= 64; car.drift = -2; key.side = 1;}
+    }
+}
+
 
 function renderMap() {
     document.getElementById(map.id).style.height = map.height + 'px';
@@ -242,8 +286,22 @@ function renderMap() {
     document.getElementById(map.id).style.top = map.y + 'px';
     document.getElementById(map.id).style.left = map.x + 'px';
     document.getElementById(map.id).style.backgroundColor = map.color;
-    document.getElementById(map.id).style.borderRadius = map.border + 'px';
-    document.getElementById(map.id).style.boxShadow = '0px 1px 10px 5px rgba(34, 60, 80, 0.25)';
+    document.getElementById(map.id).style.borderRadius = map.border + 'px ' + 0 + 'px ' + 0 + 'px ' + map.border + 'px ';
+    document.getElementById(map.id).style.boxShadow = '0px 0px 10px 5px rgba(34, 60, 80, 0.25)';
+    document.getElementById('turboBar').style.height = map.height + 'px';
+    document.getElementById('turboBar').style.width = 10 + 'px';
+    document.getElementById('turboBar').style.top = map.y + 'px';
+    document.getElementById('turboBar').style.left = map.x + map.width + 'px';
+    document.getElementById('turboBar').style.backgroundColor = 'grey';
+    document.getElementById('turboBar').style.borderRadius = 0 + 'px ' + map.border + 'px ' + map.border + 'px ' + 0 + 'px ';
+    document.getElementById('turboBar').style.boxShadow = '2px 0px 6px 3px rgba(34, 60, 80, 0.25)';
+    document.getElementById('turbo').style.height = turbo.height + 'px';
+    document.getElementById('turbo').style.width = turbo.width + 'px';
+    document.getElementById('turbo').style.top = turbo.y + 'px';
+    document.getElementById('turbo').style.left = turbo.x + 'px';
+    document.getElementById('turbo').style.backgroundColor = 'aqua';
+    document.getElementById('turbo').style.borderRadius = 0 + 'px ' + map.border + 'px ' + map.border + 'px ' + 0 + 'px ';
+    document.getElementById('turbo').style.transition = 'ease ' + car.trans + 's';
 }
 
 function createCar() {
